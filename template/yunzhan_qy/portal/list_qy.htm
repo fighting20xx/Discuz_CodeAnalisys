@@ -1,0 +1,118 @@
+<!--{template common/header}-->
+<!--[name]list_qy[/name]-->
+<!--{eval $list = array();}-->
+<!--{eval $wheresql = category_get_wheresql($cat);}-->
+<!--{eval $list = category_get_list($cat, $wheresql, $page);}-->
+</div>
+<link rel="stylesheet" type="text/css" href="template/yunzhan_qy/style/css/list.css" media="all">
+
+<!--{ad/text/wp a_t}-->
+<style id="diy_style" type="text/css"></style>
+<div class="wp">
+	<!--[diy=diy1]--><div id="diy1" class="area"></div><!--[/diy]-->
+</div>
+
+<!--banner-->
+
+
+
+
+
+<div id="ct" class="ct2 wp cl">
+	<div class="l-content art_l">
+		<!--{ad/articlelist/mbm hm/1}--><!--{ad/articlelist/mbm hm/2}-->
+		<!--[diy=listcontenttop]--><div id="listcontenttop" class="area"></div><!--[/diy]-->
+		<div class="bm">
+			<div class="bm_h cl" style="border:none">
+				<span class="list_tit">$cat[catname]</span>
+			</div>
+			<!--{if $cat[subs]}-->
+			<div class="bm_c bbda">
+				{lang sub_category}:&nbsp;&nbsp;
+				<!--{eval $i = 1;}-->
+				<!--{loop $cat[subs] $value}-->
+				<!--{if $i != 1}--><span class="pipe">|</span><!--{/if}--><a href="{$portalcategory[$value['catid']]['caturl']}" class="xi2">$value[catname]</a><!--{eval $i--;}-->
+				<!--{/loop}-->
+			</div>
+			<!--{/if}-->
+			<div class="bm_c xld">
+			<!--{loop $list['list'] $value}-->
+				<!--{eval $highlight = article_title_style($value);}-->
+				<!--{eval $article_url = fetch_article_url($value);}-->
+				<dl class="bbda cl">
+					<dd class="xs2 cl">
+						<!--{if $value[pic]}--><div class="atc"><a href="$article_url" target="_blank"><img src="$value[pic]" alt="$value[title]" class="tn img-hover" /></a></div><!--{/if}-->
+                        <div class="list_htit"><a href="$article_url" target="_blank" class="xi2" $highlight>$value[title]</a> <!--{if $value[status] == 1}-->({lang moderate_need})<!--{/if}--></div>
+						$value[summary]
+                        <div class="list_pipe_box">
+						<!--{if $value[catname] && $cat[subs]}-->{lang category}: <label><a href="{$portalcategory[$value['catid']]['caturl']}" class="xi2">$value[catname]</a></label>&nbsp;&nbsp;<!--{/if}-->
+						<span class="xg1"> $value[dateline]</span>
+						<!--{if $_G['group']['allowmanagearticle'] || ($_G['group']['allowpostarticle'] && $value['uid'] == $_G['uid'] && (empty($_G['group']['allowpostarticlemod']) || $_G['group']['allowpostarticlemod'] && $value['status'] == 1)) || $categoryperm[$value['catid']]['allowmanage']}-->
+						<span class="xg1">
+							<span class="pipe">|</span>
+							<label><a href="portal.php?mod=portalcp&ac=article&op=edit&aid=$value[aid]">{lang edit}</a></label>
+							<span class="pipe">|</span>
+							<label><a href="portal.php?mod=portalcp&ac=article&op=delete&aid=$value[aid]" id="article_delete_$value[aid]" onclick="showWindow(this.id, this.href, 'get', 0);">{lang delete}</a></label>
+						</span>
+						<!--{/if}-->
+					    </div>
+					</dd>
+					
+				</dl>
+			<!--{/loop}-->
+			</div>
+			<!--[diy=listloopbottom]--><div id="listloopbottom" class="area"></div><!--[/diy]-->
+		</div>
+		<!--{ad/articlelist/mbm hm/3}--><!--{ad/articlelist/mbm hm/4}-->
+		<!--{if $list['multi']}--><div class="pgs cl">{$list['multi']}</div><!--{/if}-->
+
+		<!--[diy=diycontentbottom]--><div id="diycontentbottom" class="area"></div><!--[/diy]-->
+
+	</div>
+	
+	
+	
+<!--rightsidebar begain-->
+	<div class="left">
+		<div class="activity" id="hotActivity">
+			<div class="wrapperBox border-box ">
+				<div class="titleHolder cf border-box">
+					<!--[diy=diy10]--><div id="diy10" class="area"></div><!--[/diy]-->
+				</div>
+
+				<div class="contentHolder cf">
+					<!--[diy=diy9]--><div id="diy9" class="area"></div><!--[/diy]-->
+				</div>
+			</div>
+		</div>
+
+		<div class="activity " id="recommandTopic">
+		<div class="wrapperBox border-box last">
+				<div class="titleHolder cf border-box">
+					<!--[diy=diy8]--><div id="diy8" class="area"></div><!--[/diy]-->
+				</div>
+				<div class="contentHolder cf">
+					<!--[diy=diy7]--><div id="diy7" class="area"></div><!--[/diy]-->
+				</div>
+		</div>
+		</div>
+
+	<div class="newGamesInfo wrapperBox border-box">
+		<div class="titleHolder cf border-box">
+			<!--[diy=diy6]--><div id="diy6" class="area"></div><!--[/diy]-->
+		</div>
+		<div class="contentHolder clearfix">
+			<!--[diy=diy5]--><div id="diy5" class="area"></div><!--[/diy]-->
+		</div>
+	</div>
+
+	</div>
+<!--rightsidebar end-->
+	
+</div>
+
+<div class="wp mtn">
+	<!--[diy=diy3]--><div id="diy3" class="area"></div><!--[/diy]-->
+</div>
+
+<!--{template common/footer}-->
